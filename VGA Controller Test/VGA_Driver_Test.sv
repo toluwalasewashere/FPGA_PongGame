@@ -18,6 +18,7 @@ module VGA_Driver_Test(
     
     logic clk, rst;
     logic locked;
+    logic [9:0] x, y;
     
     logic video_on;
     reg [11:0] RGB_reg;
@@ -64,7 +65,9 @@ module VGA_Driver_Test(
 	.probe0(rst), // input wire rst  
 	.probe1(video_on), // input wire video_on 
 	.probe2(o_VGA_HS), // input wire o_VGA_HS 
-	.probe3(o_VGA_VS) // input wire o_VGA_VS
+	.probe3(o_VGA_VS), // input wire o_VGA_VS
+	.probe4(x),
+	.probe5(y)
 );
     
     //RGB Buffer
