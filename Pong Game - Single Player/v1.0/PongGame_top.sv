@@ -1,10 +1,5 @@
 `timescale 1ns / 1ps
-/*Top module for Single player pong game (v1.0) -- This version is played using the push buttons on the Nexys A7.
- *
- * References:
- * Github Repo: FPGADude/Digital-Design
- * Chu, Pong P. Wiley, 2008. "FPGA Prototyping by Verilog Examples: Xilinx Spartan-3 Version." Ch. 13 VGA Controller I: Graphic.
-*/
+
 
 module PongGame_top(
     input wire i_sys_clk,
