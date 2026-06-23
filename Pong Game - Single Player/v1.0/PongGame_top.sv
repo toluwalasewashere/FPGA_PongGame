@@ -1,5 +1,11 @@
 `timescale 1ns / 1ps
 
+/*Top module for Single player pong game (v1.0) -- This version is played using the push buttons on the Nexys A7.
+ *
+ * References:
+ * Github Repo: FPGADude/Digital-Design
+ * Chu, Pong P. Wiley, 2008. "FPGA Prototyping by Verilog Examples: Xilinx Spartan-3 Version." Ch. 13 VGA Controller I: Graphic.
+*/
 
 module PongGame_top(
     input wire i_sys_clk,
@@ -12,7 +18,12 @@ module PongGame_top(
     output logic [3:0] o_VGA_G,
     output logic [3:0] o_VGA_B
     );
+
+    //Local Parameters for Debouncers
+    localparam CLK_FREQ = 100_000_000;
+    localparam DEBOUNCE_TIME = 20;
     
+    //Internal wires and registers
     logic clk, rst;
     logic locked;
     logic [9:0] x, y;
@@ -44,18 +55,24 @@ module PongGame_top(
     );
     
     //Button Debouncer instantation
-    debouncer db_BTNU (
-        .i_clk(clk),
-        .i_rst(rst),
-        .i_btn_in(BTNU),
-        .o_btn_out (UP)
+    btn_debouncer #(
+            .CLK_FREQ(CLK_FREQ),
+            .DEBOUNCE_TIME(DEBOUNCE_TIME)
+        )db_BTNU(
+            .i_clk(clk),
+            .i_rst(rst),
+            .i_btn_in(BTNU),
+            .o_btn_out (UP)
     );
     
-    debouncer db_BTND (
-        .i_clk(clk),
-        .i_rst(rst),
-        .i_btn_in(BTND),
-        .o_btn_out (DOWN)
+    btn_debouncer #(
+            .CLK_FREQ(CLK_FREQ),
+            .DEBOUNCE_TIME(DEBOUNCE_TIME)
+        )db_BTND(
+            .i_clk(clk),
+            .i_rst(rst),
+            .i_btn_in(BTND),
+            .o_btn_out (DOWN)
     );
     
     
